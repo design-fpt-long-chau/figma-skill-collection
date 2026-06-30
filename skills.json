@@ -1,0 +1,10 @@
+{
+  "skills": [
+    {
+      "name": "use-design-system",
+      "category": "Design System",
+      "description": "Workflow để leverage design system libraries",
+      "content": "---\nname: use-design-system\ndescription: ...\n---\n\n# Nội dung skill..."
+    }
+  ]
+}
