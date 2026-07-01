@@ -1,4 +1,5 @@
 # Skill: Tạo slide mới từ slide template
+
 ---
 name: long-chau-slide
 description: Tạo slide mới theo template Nhà Thuốc Long Châu — clone đúng layout từ file template, dùng đúng component/token/style có sẵn, chỉ edit text và image content
