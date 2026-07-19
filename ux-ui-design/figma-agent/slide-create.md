@@ -255,3 +255,39 @@ Slide 11 có 3 children direct:
 - Col 1: INSTANCE "Slide/Note/Number Item" (x≈64)   → có TEXT number + title + bullets
 - Col 2: INSTANCE "Slide/Note/Number Item" (x≈678)  → có TEXT number + title + bullets
 - Col 3: FRAME   "Note"                   (x≈1292)   → ẨN cái này (col*
+
+
+6. Prototype — Keyboard Navigation (Forward / Backward)
+Sau khi hoàn tất layout và edit text, luôn thêm prototype interaction để navigate bằng phím mũi tên trái/phải.
+
+Cơ chế:
+
+Phím → (Right Arrow, keyCode 39): Forward — chuyển tới slide kế tiếp
+Phím ← (Left Arrow, keyCode 37): Backward — quay lại slide trước đó
+Click: Forward — chuyển tới slide kế tiếp (fallback cho mouse user)
+Quy tắc:
+
+Slide đầu tiên: chỉ có Forward (→ + Click), không có Backward
+Slide cuối cùng: chỉ có Backward (←), không có Forward
+Các slide ở giữa: có cả Forward + Backward + Click
+Transition: DISSOLVE, easing EASE_OUT, duration 0.3s
+Set page.flowStartingPoints cho slide đầu tiên
+Code pattern:
+
+javascript code
+const LEFT_ARROW = 37;
+const RIGHT_ARROW = 39;
+
+const flowOrder = [/* array of slide IDs theo thứ tự trình chiếu */];
+
+for (let i = 0; i < flowOrder.length; i++) {
+  const node = await figma.getNodeByIdAsync(flowOrder[i]);
+  const reactions = [];
+
+  // Forward: Right Arrow → next slide
+Lưu ý quan trọng:
+
+Destination phải là top-level frame KHÁC trên cùng page — không navigate tới chính nó (sẽ bị reject)
+Slide cuối KHÔNG có ON_CLICK và RIGHT_ARROW vì không có destination hợp lệ
+flowOrder array phải đúng thứ tự trình chiếu — xây dựng từ layout position hoặc naming convention
+Dùng await node.setReactionsAsync(reactions) — ghi đè toàn bộ reactions cũ, nên gọi sau khi đã build đủ cả 3 loại trigger
