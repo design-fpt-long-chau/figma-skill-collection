@@ -257,7 +257,7 @@ Slide 11 có 3 children direct:
 - Col 3: FRAME   "Note"                   (x≈1292)   → ẨN cái này (col*
 
 
-6. Prototype — Keyboard Navigation (Forward / Backward)
+### 6. Prototype — Keyboard Navigation (Forward / Backward)
 Sau khi hoàn tất layout và edit text, luôn thêm prototype interaction để navigate bằng phím mũi tên trái/phải.
 
 Cơ chế:
